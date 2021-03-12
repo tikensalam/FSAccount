@@ -1,0 +1,33 @@
+<template>
+    
+    <lightning-card title="Financial Services Account Listing">
+        <div class="slds-m-around_medium"> 
+            <lightning-input 
+                type = "search" 
+                label = "Search Accounts by Name"
+                value = {searchKey}
+                oncommit={handleSearch}>
+            </lightning-input>
+        </div>
+        <div class = "slds-m-around_medium">
+            <template if:true={allAccounts}>
+                <lightning-datatable
+                    key-field = "Id"
+                    hide-checkbox-column
+                    data = {allAccounts}
+                    columns = {columns}
+                    onsave = {handleSave}
+                    draft-values = {draftValues}
+                    sorted-direction={sortDirection}
+                    sorted-by={sortedBy}
+                    onsort={onHandleSort}
+                    onrowaction={handleRowAction}>
+
+                </lightning-datatable>
+            </template>
+            <template if:true={error}>
+                <h1> Unable to retrieve the Accounts </h1>
+            </template>
+        </div>
+    </lightning-card>
+</template>
